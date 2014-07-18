@@ -1,0 +1,93 @@
+<?php
+require_once("../inc/conf.php");
+require_once(SITEROOT . "/inc/db.php");
+?>
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:Web="http://schemas.live.com/Web/">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>Trade Log Manage</title>
+<style>
+body, div, td {font-size: 12px;}
+</style>
+</head>
+<body>
+<p>查看下单记录</p>
+<?php
+	$q = 
+	"select
+		`id`,
+		`order_id`,
+		`regdate`,
+		`order_type`,
+		`user_name`,
+		`fng_nick`,
+		`stock_code`,
+		`stock_name`,
+		`buying_rate`,
+		`is_deal`,
+		`liquidate_date`,
+		`selling_rate`,
+		`amount`,
+		`user_quota`,
+		`income`,
+		`stampduty`,
+		`occupancycost`,
+		`benefitsharing`,
+		`initiatorsharing`
+	from `trade_order_log`
+	order by `order_id` desc";
+    $rs = mysql_query($q); //获取数据集
+	if(!$rs){die("Valid result!");}
+
+    echo "<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse\">";
+    echo "
+	<tr>
+	  <td>id</td>
+	  <td>跟单号</td>
+	  <td>下单日期</td>
+	  <td>类型</td>
+	  <td>用户</td>
+	  <td>股票代码</td>
+	  <td>股票名称</td>
+	  <td>买入价</td>
+	  <td>是否成交</td>
+	  <td>平仓时间</td>
+	  <td>卖出价</td>
+	  <td>买入数量</td>
+	  <td>用户配比</td>
+	  <td>收入</td>
+	  <td>交易税</td>
+	  <td>资金占用费</td>
+	  <td>受益分成</td>
+	  <td>发起人分成</td>
+	</tr>";
+    while($row = mysql_fetch_array($rs)){
+	  echo "<tr>
+	  <td>" . $row["id"] . "</td>
+	  <td>" . $row["order_id"] . "</td>
+	  <td>" . $row["regdate"] . "</td>
+	  <td>" . (($row["order_type"]==1)?"官方":"个人") ."</td>
+	  <td>" . $row["user_name"] ." (". $row["fng_nick"] . ")</td>
+	  <td>" . $row["stock_code"] . "</td>
+	  <td>" . $row["stock_name"] . "</td>
+	  <td>" . $row["buying_rate"] . "</td>
+	  <td>" . $row["is_deal"] . "</td>
+	  <td>" . $row["liquidate_date"] . "</td>
+	  <td>" . $row["selling_rate"] . "</td>
+	  <td>" . $row["amount"] . "</td>
+	  <td>" . $row["user_quota"] . "</td>
+	  <td>" . $row["income"] . "</td>
+	  <td>" . $row["stampduty"] . "</td>
+	  <td>" . $row["occupancycost"] . "</td>
+	  <td>" . $row["benefitsharing"] . "</td>
+	  <td>" . $row["initiatorsharing"] . "</td>
+	</tr>"; //显示数据
+	}
+    echo "</table>";
+
+    mysql_free_result($rs); //关闭数据集
+
+?>             
+</body>
+</html>
