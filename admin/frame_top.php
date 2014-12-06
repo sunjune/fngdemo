@@ -9,6 +9,6 @@ require_once(SITEROOT . "/inc/db.php");
 <title>FNG Manage</title>
 </head>
 <body>
-<p>Do something here...</p>
+<p>FNGame.com.cn</p>
 </body>
 </html>
