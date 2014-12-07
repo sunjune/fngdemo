@@ -8,7 +8,7 @@ require_once(SITEROOT . "/inc/db.php");
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>Stock Simulation</title>
 <style>
-body, div, td {font-size: 12px;}
+body, div, td {font-size: 14px;}
 </style>
 </head>
 <body>
@@ -31,18 +31,33 @@ if( !empty($_REQUEST["opt_type"]) && !empty($_REQUEST["id"]) && !empty($_REQUEST
 		
 		$mysql_buyingrate = $row['buying_rate'];
 		
-		if($mysql_closingprice >= $mysql_buyingrate){
+		//如果卖出价高于买入价
+		if($mysql_closingprice > $mysql_buyingrate){
 			//计算股票收入
 			$q = "update `trade_order_log` set `is_deal`=1, `selling_rate`=".$mysql_closingprice.", `stampduty`=19.9, `occupancycost`=(`user_quota` * `buying_rate` * `amount` * 0.004), `liquidate_date`='".date("Y-m-d H:i:s")."', `income`=(".($mysql_closingprice-$mysql_buyingrate)." * `amount` * (1+`user_quota`)) where `stock_id`=".$mysql_stockid." and `regdate`='".$mysql_curdate."' and `is_deal`=0";
-			$rs = mysql_query($q); //获取数据集
-			if(!$rs){die("Valid result!");}
+
+			$rs = mysql_query($q); //执行查询
+			if(!$rs){die("数据库操作错误!");}
+			
 			//扣除交易及资金占用费和收益分成还有发起人收益分成
 			$q = "update `trade_order_log` set `benefitsharing`=( (`income` - `stampduty` - `occupancycost`) * 0.2 ), `initiatorsharing`=((`income` - `stampduty` - `occupancycost` - (`income` - `stampduty` - `occupancycost`) * 0.2 ) * 0.1 ) where `stock_id`=".$mysql_stockid." and `regdate`='".$mysql_curdate."' and `is_deal`=1";
 
-			//单独为发起人抹掉 发起人收益分成
+			$rs = mysql_query($q); //执行查询
+			if(!$rs){die("数据库操作错误!");}
 			
-			$rs = mysql_query($q); //获取数据集
-			if(!$rs){die("Valid result!");}
+			//单独为发起人抹掉 发起人收益分成
+			$q = "update `trade_order_log` set `initiatorsharing`=0 where `is_initiator`=1 and `regdate`='".$mysql_curdate."' and `is_deal`=1";
+			
+			$rs = mysql_query($q); //执行查询
+			if(!$rs){die("数据库操作错误!");}
+
+		}
+		else{
+			//计算股票收入
+			$q = "update `trade_order_log` set `is_deal`=1, `selling_rate`=".$mysql_closingprice.", `stampduty`=19.9, `occupancycost`=(`user_quota` * `buying_rate` * `amount` * 0.004), `liquidate_date`='".date("Y-m-d H:i:s")."', `income`=0 where `stock_id`=".$mysql_stockid." and `regdate`='".$mysql_curdate."' and `is_deal`=0";
+
+			$rs = mysql_query($q); //执行查询
+			if(!$rs){die("数据库操作错误!");}
 
 		}
 

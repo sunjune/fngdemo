@@ -7,6 +7,10 @@ require_once(SITEROOT . "/inc/db.php");
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>Group Manage Add</title>
+<style>
+body, div, td {font-size: 14px;}
+</style>
+
 </head>
 <body>
 <?php
@@ -45,15 +49,15 @@ if( !empty($_REQUEST["stock_id"]) && !empty($_REQUEST["stock_name"]) && !empty($
 	
 	$mysql_buyingrate= floatval($_REQUEST['buying_rate']);
 	
-	$mysql_limitmin= intval($_REQUEST['limit_min']);
-	$mysql_limitmax= intval($_REQUEST['limit_max']);
+	//$mysql_limitmin= intval($_REQUEST['limit_min']);
+	//$mysql_limitmax= intval($_REQUEST['limit_max']);
 	
 	$mysql_amount= intval($_REQUEST['amount']);
 	$mysql_userquota= floatval($_REQUEST['user_quota']);
 
 	$mysql_regdate = date('Y-m-d H:i:s');
 	
-    $q = "INSERT INTO `trade_order` (`regdate`, `order_type`, `user_id`, `user_name`, `fng_nick`, `stock_id`, `stock_code`, `stock_name`, `buying_rate`, `limit_min`, `limit_max`) VALUES ('" . $mysql_regdate . "', " . $mysql_ordertype .", ". $mysql_userid . ", '". $mysql_username . "', '". $mysql_fngnick . "', '" . $mysql_stockid ."', '" . $mysql_stockcode ."', '" . $mysql_stockname ."', " . $mysql_buyingrate .", " . $mysql_limitmin .", " . $mysql_limitmax .");";
+    $q = "INSERT INTO `trade_order` (`regdate`, `order_type`, `user_id`, `user_name`, `fng_nick`, `stock_id`, `stock_code`, `stock_name`, `buying_rate`) VALUES ('" . $mysql_regdate . "', " . $mysql_ordertype .", ". $mysql_userid . ", '". $mysql_username . "', '". $mysql_fngnick . "', '" . $mysql_stockid ."', '" . $mysql_stockcode ."', '" . $mysql_stockname ."', " . $mysql_buyingrate .");";
  //var_dump($q);
  //exit;
  
@@ -62,14 +66,14 @@ if( !empty($_REQUEST["stock_id"]) && !empty($_REQUEST["stock_name"]) && !empty($
 	if($mysql_ordertype == '0'){
 		$mysql_orderid = mysql_insert_id();	//得到跟单的id
 		
-		$q = "INSERT INTO `trade_order_log` ( `regdate`, `order_id`, `order_type`, `user_id`, `user_name`, `fng_nick`, `stock_id`, `stock_code`, `stock_name`, `buying_rate`, `amount`, `user_quota` ) values ('".$mysql_regdate."', ".$mysql_orderid.", ".$mysql_ordertype.", ".$mysql_userid.", '".$mysql_username."', '".$mysql_fngnick."', ".$mysql_stockid.", '".$mysql_stockcode."', '".$mysql_stockname."', ".$mysql_buyingrate.", ".$mysql_amount.", ".$mysql_userquota.");";
+		$q = "INSERT INTO `trade_order_log` ( `regdate`, `order_id`, `order_type`, `user_id`, `user_name`, `fng_nick`, `stock_id`, `stock_code`, `stock_name`, `buying_rate`, `amount`, `user_quota`, `is_initiator`) values ('".$mysql_regdate."', ".$mysql_orderid.", ".$mysql_ordertype.", ".$mysql_userid.", '".$mysql_username."', '".$mysql_fngnick."', ".$mysql_stockid.", '".$mysql_stockcode."', '".$mysql_stockname."', ".$mysql_buyingrate.", ".$mysql_amount.", ".$mysql_userquota.", 1);";
 
 		$rs = mysql_query($q); //获取数据集
 	}
  //var_dump($q);
  //exit;
 
-	echo '添加完成<br /><a href="group_manage_add.php">继续添加</a>';
+	echo '添加完成<br /><a href="group_manage.php">查看跟单列表</a>';
     //mysql_free_result($rs); //关闭数据集
 }
 else{
@@ -91,7 +95,7 @@ else{
 	  <select name="user_id" onchange="viewUser(this);">
 		<option value="0">请选择用户</option>
 <?php
-	$q = "select `id`, `username`, `fng_nick` from `user_info` where `user_level`>0 order by `username`";
+	$q = "select `id`, `username`, `fng_nick` from `user_info` where `fng_recommend`>0 order by `username`";
     $rs = mysql_query($q); //获取数据集
     while($row = mysql_fetch_array($rs)){
 	    echo "<option value=\"".$row["id"]."\">".$row["username"]."_".$row["fng_nick"]."</option>";
@@ -104,7 +108,7 @@ else{
 	</tr>
 	<tr>
 	<td>类型</td>
-	<td><label for="order_type1"><input type="radio" name="order_type" id="order_type1" value="0" />个人单</label> <label for="order_type2"><input type="radio" name="order_type" id="order_type2" value="1" />官方单</label></td>
+	<td><label for="order_type1"><input type="radio" name="order_type" id="order_type1" value="0" checked />个人单</label> <label for="order_type2"><input type="radio" name="order_type" id="order_type2" value="1" />官方单</label></td>
 	</tr>
 	<tr>
 	<td>选择股票</td>
@@ -132,7 +136,7 @@ else{
 	<td>买入价</td>
 	<td><input type="text" name="buying_rate" value="" /></td>
 	</tr>
-	<tr>
+	<!-- tr>
 	<td>团单填写</td>
 	<td>&nbsp;</td>
 	</tr>
@@ -145,7 +149,7 @@ else{
 	<td>总额上限</td>
 	<td><input type="text" name="limit_max" value="" /></td>
 	</tr>
-	<tr>
+	<tr -->
 	<td>个单填写</td>
 	<td>&nbsp;</td>
 	</tr>
@@ -155,7 +159,7 @@ else{
 	</tr>
 	<tr>
 	<td>用户配比</td>
-	<td><input type="text" name="user_quota" value="" /></td>
+	<td><input type="text" name="user_quota" value="11.5" /></td>
 	</tr>
 	<tr>
 	<td><input type="submit" value=" 确 定 " /></td>

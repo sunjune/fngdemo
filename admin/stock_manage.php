@@ -8,7 +8,7 @@ require_once(SITEROOT . "/inc/db.php");
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>User Manage</title>
 <style>
-body, div, td {font-size: 12px;}
+body, div, td {font-size: 14px;}
 </style>
 </head>
 <body>
@@ -34,7 +34,7 @@ body, div, td {font-size: 12px;}
 	  <td>" . $row["stock_code"] . "</td>
 	  <td>" . $row["stock_name"] . "</td>
 	  <td>" . $row["stock_price"] . "</td>
-	  <td><a href=\"stock_manage_modify.php?id=" . $row["id"] . "&opt_type=edit\">修改</a> &nbsp; <a href=\"stock_simulation.php?id=" . $row["id"] . "\">模拟平仓</a></td>
+	  <td><a href=\"stock_manage_modify.php?id=" . $row["id"] . "&opt_type=edit\">修改股票信息</a> &nbsp; <a href=\"stock_simulation.php?id=" . $row["id"] . "\">模拟平仓</a></td>
 	</tr>"; //显示数据
 	}
     echo "</table>";

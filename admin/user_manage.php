@@ -8,13 +8,13 @@ require_once(SITEROOT . "/inc/db.php");
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>User Manage</title>
 <style>
-body, div, td {font-size: 12px;}
+body, div, td {font-size: 14px;}
 </style>
 </head>
 <body>
 <p>用户管理</p>
 <?php   
-	$q = "select `id`, `username`, `email`, `mobile`, `regdate`, `user_level`, `user_quota`, `fng_recommend` from `user_info` order by `id` desc";
+	$q = "select `id`, `username`, `fng_nick`, `email`, `mobile`, `regdate`, `user_level`, `user_quota`, `fng_recommend` from `user_info` order by `id` desc";
     $rs = mysql_query($q); //获取数据集
 	if(!$rs){die("Valid result!");}
 
@@ -23,6 +23,7 @@ body, div, td {font-size: 12px;}
 	<tr>
 	  <td>id</td>
 	  <td>用户名</td>
+	  <td>用户昵称</td>
 	  <td>邮箱</td>
 	  <td>手机</td>
 	  <td>注册日期</td>
@@ -36,6 +37,7 @@ body, div, td {font-size: 12px;}
 	<tr>
 	  <td>" . $row["id"] . "</td>
 	  <td>" . $row["username"] . "</td>
+	  <td>" . $row["fng_nick"] . "</td>
 	  <td>" . $row["email"] . "</td>
 	  <td>" . $row["mobile"] . "</td>
 	  <td>" . $row["regdate"] . "</td>

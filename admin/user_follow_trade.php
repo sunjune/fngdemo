@@ -8,7 +8,7 @@ require_once(SITEROOT . "/inc/db.php");
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>User Followship</title>
 <style>
-body, div, td {font-size: 12px;}
+body, div, td {font-size: 14px;}
 </style>
 </head>
 <body>

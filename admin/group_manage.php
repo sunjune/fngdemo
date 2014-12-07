@@ -8,11 +8,11 @@ require_once(SITEROOT . "/inc/db.php");
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>Group Manage</title>
 <style>
-body, div, td {font-size: 12px;}
+body, div, td {font-size: 14px;}
 </style>
 </head>
 <body>
-<p>跟单管理 &nbsp; <a href="group_manage_add.php">发起跟单</a></p>
+<p>跟单管理 &nbsp; <a href="group_manage_add.php">发起跟单</a> &nbsp; <a href="group_manage_clear.php">清空</a></p>
 <?php
 	$q = 
 	"select
@@ -50,7 +50,6 @@ body, div, td {font-size: 12px;}
 	  <td>卖出价</td>
 	  <td>总额下限</td>
 	  <td>总额上限</td>
-	  <td>&nbsp;</td>
 	</tr>";
     while($row = mysql_fetch_array($rs)){
 	  echo "<tr>
@@ -66,7 +65,6 @@ body, div, td {font-size: 12px;}
 	  <td>" . $row["selling_rate"] . "</td>
 	  <td>" . $row["limit_min"] . "</td>
 	  <td>" . $row["limit_max"] . "</td>
-	  <td><a href=\"group_manage_modify.php?id=" . $row["order_id"] . "&opt_type=edit\">修改</a></td>
 	</tr>"; //显示数据
 	}
     echo "</table>";
