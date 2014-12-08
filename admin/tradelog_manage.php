@@ -17,7 +17,7 @@ td { font-size: 12px; font-family: Arial;}
 
 .numvalue {text-align: right;}
 
-#income_divide {width: 100px; height: 20px; border: 1px solid #ccc;}
+#income_divide {width: 280px; height: 20px; border: 1px solid #ccc;}
 #income_divide div {float: left; height: 20px;}
 #income_divide .stampduty {background-color: #2bc91a;}
 #income_divide .occupancycost {background-color: #f218bb;}
@@ -128,9 +128,9 @@ td { font-size: 12px; font-family: Arial;}
 	    	echo "2";
 		}
 	    echo "px;\"></div>
-	    <div class=\"occupancycost\" style=\"width:" . floor($row["occupancycost"]/$row["income"]*100) . "px;\"></div>
-	    <div class=\"benefitsharing\" style=\"width:" . floor($row["benefitsharing"]/$row["income"]*100) . "px;\"></div>
-	    <div class=\"initiatorsharing\" style=\"width:" . floor($row["initiatorsharing"]/$row["income"]*100) . "px;\"></div>
+	    <div class=\"occupancycost\" style=\"width:" . floor($row["occupancycost"]/$row["income"]*280) . "px;\"></div>
+	    <div class=\"benefitsharing\" style=\"width:" . floor($row["benefitsharing"]/$row["income"]*280) . "px;\"></div>
+	    <div class=\"initiatorsharing\" style=\"width:" . floor($row["initiatorsharing"]/$row["income"]*280) . "px;\"></div>
 	  </div>";
 		}
 	echo "</td>
@@ -156,7 +156,7 @@ td { font-size: 12px; font-family: Arial;}
 	  <th class='numvalue'>".$occupancycost_total."</th>
 	  <th class='numvalue'>".$benefitsharing_total."</th>
 	  <th class='numvalue'>".$initiatorsharing_total."</th>
-	  <th>". ($stampduty_total + $occupancycost_total + $benefitsharing_total + $initiatorsharing_total) ."</th>
+	  <th>". ($stampduty_total + $occupancycost_total + $benefitsharing_total) ."</th>
 	</tr>";
     echo "</table>";
 
