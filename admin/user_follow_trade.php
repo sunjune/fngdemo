@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("../inc/conf.php");
 require_once(SITEROOT . "/inc/db.php");
 ?>
@@ -83,6 +83,10 @@ elseif( !empty($_REQUEST["uid"]) && !empty($_REQUEST["fid"]) ) {
 //exit;
     $rs = mysql_query($q); //获取数据集
 	if(!$rs) {die("Valid result!");}
+    if(mysql_num_rows($rs) < 1){
+	echo '无可用跟单，请<a href="user_followship.php">返回</a>';
+	exit();
+    }
 
     echo "<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse\">";
     echo "

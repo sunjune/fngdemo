@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("../inc/conf.php");
 require_once(SITEROOT . "/inc/db.php");
 ?>
@@ -8,8 +8,8 @@ require_once(SITEROOT . "/inc/db.php");
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title>Trade Log Manage</title>
 <style>
-body, div {font-size: 14px;}
-td { font-size: 12px;}
+body, div {font-size: 14px; font-family: Arial;}
+td { font-size: 12px; font-family: Arial;}
 .stampduty {color: #2bc91a;}
 .occupancycost {color: #f218bb;}
 .benefitsharing {color: #335af4;}

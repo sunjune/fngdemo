@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("../inc/conf.php");
 require_once(SITEROOT . "/inc/db.php");
 ?>
@@ -13,7 +13,6 @@ li {line-height: 2em; }
 </head>
 <body>
 <ul>
-  <li><a href="user_manage.php" target="frame_content">用户列表</a></li>
   <li><a href="user_followship.php" target="frame_content">关注关系</a></li>
   <li><a href="stock_manage.php" target="frame_content">股票列表</a></li>
   <li><a href="group_manage.php" target="frame_content">跟单操作</a></li>
