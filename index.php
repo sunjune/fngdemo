@@ -12,7 +12,6 @@
 </head>
 <body id="bid">
 <!--登录条-->
-<!--#include virtual="/cntv/inc/topnav.shtml" -->
 <div class="bg_top_h_tile">
   <div class="bg_top_owner">
     <div id="page_body">
@@ -91,22 +90,6 @@
 								require_once("inc/login_info.php");
 								?>
                                       <div class="vspace"></div>
-                                      <script type="text/javascript">
-										function do_form_login(){
-											var login_form = document.getElementById('index_login');
-											var username=login_form.username.value;
-											var password=login_form.password.value;
-											
-											if(username != '' && password != ''){
-												login_form.submit();
-											}
-											else{
-												alert('请正确填写登录信息');
-											}
-											return false;
-										}
-
-									  </script>
                                       <div class="text_box">
                                       				<h3><a href="">推荐用户</a></h3>
                                               <table cellpadding="0" cellspacing="0">

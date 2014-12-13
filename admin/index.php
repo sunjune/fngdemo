@@ -10,7 +10,7 @@ require_once(SITEROOT . "/inc/db.php");
 </head>
 <frameset rows="60,*">
   <frame name="frame_top" src="frame_top.php">
-  <frameset cols="180, *">
+  <frameset cols="150, *">
     <frame name="frame_nav" src="frame_nav.php">
     <frame name="frame_content" src="frame_content.php">
   </frameset>

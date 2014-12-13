@@ -12,7 +12,6 @@
 </head>
 <body id="bid">
 <!--登录条-->
-<!--#include virtual="/cntv/inc/topnav.shtml" -->
 <div class="bg_top_h_tile">
   <div class="bg_top_owner">
     <div id="page_body">

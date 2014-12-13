@@ -40,16 +40,19 @@ if( !empty($_REQUEST["opt_type"]) && !empty($_REQUEST["id"]) && !empty($_REQUEST
 			if(!$rs){die("数据库操作错误!");}
 			
 			//扣除交易及资金占用费和收益分成还有发起人收益分成
-			$q = "update `trade_order_log` set `benefitsharing`=( (`income` - `stampduty` - `occupancycost`) * 0.2 ), `initiatorsharing`=((`income` - `stampduty` - `occupancycost` - (`income` - `stampduty` - `occupancycost`) * 0.2 ) * 0.1 ) where `stock_id`=".$mysql_stockid." and `regdate`='".$mysql_curdate."' and `is_deal`=1";
+			//$q = "update `trade_order_log` set `benefitsharing`=( (`income` - `stampduty` - `occupancycost`) * 0.2 ), `initiatorsharing`=((`income` - `stampduty` - `occupancycost` - (`income` - `stampduty` - `occupancycost`) * 0.2 ) * 0.1 ) where `stock_id`=".$mysql_stockid." and `regdate`='".$mysql_curdate."' and `is_deal`=1";
+			$q = "update `trade_order_log` set `benefitsharing`=( (`income` - `stampduty` - `occupancycost`) * 0.2 ) where `stock_id`=".$mysql_stockid." and `regdate`='".$mysql_curdate."' and `is_deal`=1";
 
 			$rs = mysql_query($q); //执行查询
 			if(!$rs){die("数据库操作错误!");}
 			
 			//单独为发起人抹掉 发起人收益分成
+			/*
 			$q = "update `trade_order_log` set `initiatorsharing`=0 where `is_initiator`=1 and `regdate`='".$mysql_curdate."' and `is_deal`=1";
 			
 			$rs = mysql_query($q); //执行查询
 			if(!$rs){die("数据库操作错误!");}
+			*/
 
 		}
 		else{

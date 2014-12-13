@@ -8,8 +8,10 @@ if( !empty($_REQUEST["username"]) && !empty($_REQUEST["password"]) ) {
 
 	$mysql_username = addslashes($_REQUEST['username']);
 	$mysql_password = addslashes($_REQUEST['password']);
+
+	$rtn_url = $_REQUEST['url'];
 	
-    $q = "select `id` from `user_info` where `username`='$mysql_username' and `password`='$mysql_password' limit 1";
+    $q = "select `id`, `username`, `fng_nick` from `user_info` where `username`='$mysql_username' and `password`='$mysql_password' limit 1";
  //var_dump($q);
  //exit;
  
@@ -18,10 +20,12 @@ if( !empty($_REQUEST["username"]) && !empty($_REQUEST["password"]) ) {
 	if($row){
 
 		setcookie("userloginid", $row['id'], 0, '', '', false, true);
+		setcookie("user_name", $row['username'], 0, '', '', false, true);
+		setcookie("fng_nick", $row['fng_nick'], 0, '', '', false, true);
 		
 		header("Content-type: text/html; charset=utf-8"); 
-		header("Refresh:1; URL=/");
-		echo "登录成功，正在转向首页...";
+		header("Refresh:1; URL=$rtn_url");
+		echo "登录成功，正在跳转...";
 		exit;
 	}
 	else{

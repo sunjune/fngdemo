@@ -1,19 +1,7 @@
 <?php
 require_once("../inc/conf.php");
 require_once(SITEROOT . "/inc/db.php");
-?>
-<!DOCTYPE html>
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:Web="http://schemas.live.com/Web/">
-<head>
-<meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>Group Manage Add</title>
-<style>
-body, div, td {font-size: 14px;}
-</style>
 
-</head>
-<body>
-<?php
 /*
 	`order_id` INT(11) NOT NULL AUTO_INCREMENT,
 	`regdate` DATETIME NULL DEFAULT NULL COMMENT '创建日期',
@@ -42,10 +30,11 @@ if( !empty($_REQUEST["stock_id"]) && !empty($_REQUEST["stock_name"]) && !empty($
 	$mysql_ordertype= intval($_REQUEST['order_type']);
 
 	$mysql_stockid= intval($_REQUEST['stock_id']);
+	
 	$mysql_stockinfo= $_REQUEST['stock_name'];
 	$stock_info = explode('_', $mysql_stockinfo);
-	$mysql_stockcode= addslashes($stock_info[0]);
-	$mysql_stockname= addslashes($stock_info[1]);
+	$mysql_stockcode= addslashes($stock_info[0]);	//股票代码
+	$mysql_stockname= addslashes($stock_info[1]);	//股票名称
 	
 	$mysql_buyingrate= floatval($_REQUEST['buying_rate']);
 	
@@ -73,11 +62,28 @@ if( !empty($_REQUEST["stock_id"]) && !empty($_REQUEST["stock_name"]) && !empty($
  //var_dump($q);
  //exit;
 
-	echo '添加完成<br /><a href="group_manage.php">查看跟单列表</a>';
+	if(array_key_exists('post_type', $_REQUEST) && $_REQUEST['post_type'] === 'ajax'){
+		echo '{"msg":"success"}';
+	}
+	else{
+		echo '添加完成<br /><a href="group_manage.php">查看跟单列表</a>';
+	}
     //mysql_free_result($rs); //关闭数据集
 }
 else{
 ?>
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:Web="http://schemas.live.com/Web/">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>Group Manage Add</title>
+<style>
+body, div, td {font-size: 14px;}
+</style>
+
+</head>
+<body>
+
 <p>发起跟单</p>
 <table border="0">
 <form name="form1" id="form1" method="post" action="group_manage_add.php">
@@ -95,10 +101,10 @@ else{
 	  <select name="user_id" onchange="viewUser(this);">
 		<option value="0">请选择用户</option>
 <?php
-	$q = "select `id`, `username`, `fng_nick` from `user_info` where `fng_recommend`>0 order by `username`";
+	$q = "select `id`, `username`, `fng_nick` from `user_info` order by `username`";
     $rs = mysql_query($q); //获取数据集
     while($row = mysql_fetch_array($rs)){
-	    echo "<option value=\"".$row["id"]."\">".$row["username"]."_".$row["fng_nick"]."</option>";
+	    echo "<option value=\"".$row["id"]."\">".$row["username"].'_'.$row["fng_nick"]."</option>";
 	}
 ?>
 	  </select>
@@ -108,7 +114,7 @@ else{
 	</tr>
 	<tr>
 	<td>类型</td>
-	<td><label for="order_type1"><input type="radio" name="order_type" id="order_type1" value="0" checked />个人单</label> <label for="order_type2"><input type="radio" name="order_type" id="order_type2" value="1" />官方单</label></td>
+	<td><label for="order_type1"><input type="radio" name="order_type" id="order_type1" value="0" checked />个人单</label> <!-- label for="order_type2"><input type="radio" name="order_type" id="order_type2" value="1" />官方单</label --></td>
 	</tr>
 	<tr>
 	<td>选择股票</td>
@@ -116,16 +122,20 @@ else{
 <script type="text/javascript">
   function viewStock(objsel){
 	var objForm = document.getElementById('form1');
-	objForm.stock_name.value = objsel.options[objsel.selectedIndex].text;
+
+	var objOption = objsel.options[objsel.selectedIndex];
+	objForm.stock_name.value = objOption.text;
+
+	document.querySelector('#buying_rate').value = objOption.attributes['cur_price'].value;
   }
 </script>
 	  <select name="stock_id" onchange="viewStock(this);">
 		<option value="0">请选择股票</option>
 <?php
-	$q = "select `id`, `stock_code`, `stock_name` from `stock_info` order by `stock_name`";
+	$q = "select `id`, `stock_code`, `stock_name`, `stock_price` from `stock_info` order by `stock_name`";
     $rs = mysql_query($q); //获取数据集
     while($row = mysql_fetch_array($rs)){
-	    echo "<option value=\"".$row["id"]."\">".$row["stock_code"]."_".$row["stock_name"]."</option>";
+	    echo "<option value=\"".$row["id"]."\" cur_price=\"".$row["stock_price"]."\">".$row["stock_code"]."_".$row["stock_name"]."</option>";
 	}
 ?>
 	  </select>
@@ -134,7 +144,7 @@ else{
 	</tr>
 	<tr>
 	<td>买入价</td>
-	<td><input type="text" name="buying_rate" value="" /></td>
+	<td><input type="text" name="buying_rate" id="buying_rate" placeholder="选择股票获得最新价" value="" /></td>
 	</tr>
 	<!-- tr>
 	<td>团单填写</td>
@@ -167,9 +177,8 @@ else{
 	</tr>
 </form>
 </table>
-<?php
-}
-
-?>             
 </body>
 </html>
+<?php
+}
+?>

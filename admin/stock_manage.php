@@ -21,7 +21,6 @@ body, div, td {font-size: 14px;}
     echo "<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse\">";
     echo "
 	<tr>
-	  <td>id</td>
 	  <td>股票代码</td>
 	  <td>股票名称</td>
 	  <td>当前价格</td>
@@ -30,7 +29,6 @@ body, div, td {font-size: 14px;}
     while($row = mysql_fetch_array($rs)){
 	  echo "
 	<tr>
-	  <td>" . $row["id"] . "</td>
 	  <td>" . $row["stock_code"] . "</td>
 	  <td>" . $row["stock_name"] . "</td>
 	  <td>" . $row["stock_price"] . "</td>
