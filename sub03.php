@@ -210,37 +210,16 @@
                                             <div class="vspace"></div>
                                         </div>
                                         <div class="zj_nr_top3_right">
-                                            <div class="d_1">跟单 - 跟用户　　　<a href="">规则说明 >></a></div>
-                                            <div class="vspace" style="height:14px;"></div>
-                                            <p class="p_1">注意：选择跟随某用户下单时，所有买卖规则都将按照被跟随用户设定的规则操作。</p>
-                                            <div class="vspace" style="height:14px;"></div>
-                                            <table width="240" border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="center" valign="middle">选择用户</td>
-                                                    <td align="center" valign="middle"><input type="text" class="inp_l1"/></td>
-                                                    <td valign="middle"><a href="">明星用户 >></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" valign="middle">跟单规模</td>
-                                                    <td align="center" valign="middle"><input type="text" class="inp_l1"/></td>
-                                                    <td valign="middle">元RMB</td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" valign="middle">配比倍数</td>
-                                                    <td align="center" valign="middle"><input type="text" class="inp_l1"/></td>
-                                                    <td valign="middle"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" valign="middle" class="td_1"><a href="">您目前无法享受跟单配比，获得权限 >></a></td>
-                                                </tr>
-                                            </table>
-                                            <div class="vspace" style="height:15px;"></div>
-                                            <a href="" style=" margin-left:12px;"><img src="image/gt_03.jpg" width="64" height="24" title=""/></a>
-                                            <div class="vspace"></div><div class="vspace"></div>
-                                            <div class="line"></div>
-                                            <div class="vspace"></div><div class="vspace"></div>
-                                            <p class="p_2">另一种玩法</p>
-                                            <p class="p_2">跟单 - 组团单　　<a href="">查看 >></a></p>
+                                            不会炒股?直接理财吧!
+
+正在发售
+年化收益18% 理财周期29天>>
+年化收益16% 理财周期10天>>
+年化收益20% 理财周期99天>>
+
+12月25日发售
+年化收益18% 理财周期26天>>
+
                                         </div>
                                         <div class="clear"></div>
                                     </div>
