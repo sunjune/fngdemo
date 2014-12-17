@@ -9,14 +9,13 @@
 									login_form();
 								}
 								else{
-									/*
-									$q = "select `user_name`, `fng_nick`, `user_level` from `user_info` where `id`=" . intval($_COOKIE["userloginid"]) . " limit 1";
+									
+									$q = "select `username`, `fng_nick`, `user_level` from `user_info` where `id`=" . intval($_COOKIE["userloginid"]) . " limit 1";
 								 
 									$rs = mysql_query($q); //获取数据集
-
 									$row = mysql_fetch_array($rs);
 									if($row){
-									*/
+
 										$user_id = $_COOKIE["userloginid"];
 										$fng_nick = $_COOKIE["fng_nick"];
 										$user_name = $_COOKIE["user_name"];
@@ -33,9 +32,7 @@
 										</div>
 									</div>
 							  <?php
-									/*
 									}
-									*/
 								}
 								
 								function login_form(){

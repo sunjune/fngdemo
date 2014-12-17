@@ -23,7 +23,6 @@ body, div, td {font-size: 14px;}
 	<tr>
 	  <td>股票代码</td>
 	  <td>股票名称</td>
-	  <td>当前价格</td>
 	  <td>&nbsp;</td>
 	</tr>";
     while($row = mysql_fetch_array($rs)){
@@ -31,7 +30,6 @@ body, div, td {font-size: 14px;}
 	<tr>
 	  <td>" . $row["stock_code"] . "</td>
 	  <td>" . $row["stock_name"] . "</td>
-	  <td>" . $row["stock_price"] . "</td>
 	  <td><a href=\"stock_manage_modify.php?id=" . $row["id"] . "&opt_type=edit\">修改股票信息</a> &nbsp; <a href=\"stock_simulation.php?id=" . $row["id"] . "\">模拟平仓</a></td>
 	</tr>"; //显示数据
 	}

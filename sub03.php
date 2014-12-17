@@ -120,6 +120,7 @@
                                                     <td align="center" valign="middle">
                                                       <select name="stock_id" onchange="viewStock(this);">
                                                         <option value="0">请选择股票</option>
+                                                        <!-- 
                                                         <?php
                                                             $q = "select `id`, `stock_code`, `stock_name`, `stock_price` from `stock_info` order by `stock_name`";
                                                             $rs = mysql_query($q); //获取数据集
@@ -127,10 +128,27 @@
                                                                 echo "<option value=\"".$row["id"]."\" cur_price=\"".$row["stock_price"]."\" stock_code=\"".$row["stock_code"]."\">".$row["stock_name"]."</option>";
                                                             }
                                                         ?>
+                                                        -->
                                                       </select>
+
                                                     </td>
                                                     <td valign="middle">今日禁买</td>
                                                 </tr>
+                                                      <script type="text/javascript" src="http://hq.sinajs.cn/list=sh600229,sz000920,sh600000,sz000547,sh600571,sz000987,sh601226,sh601188,sh600396,sz002735"></script>
+                                                      <script type="text/javascript">
+                                                        var stock_list_text = 'sh600229,sz000920,sh600000,sz000547,sh600571,sz000987,sh601226,sh601188,sh600396,sz002735';
+                                                        var stock_list = stock_list_text.split(',');
+                                                        var objSelect = document.getElementById('form1').stock_id;
+                                                        for(var i in stock_list){
+                                                            var stock_info = eval('hq_str_' + stock_list[i] + '.split(",")');
+                                                            var option = document.createElement("option");
+                                                            option.value = parseInt(i)+1;
+                                                            option.text = stock_info[0];
+                                                            option.setAttribute('cur_price', stock_info[3]);
+                                                            option.setAttribute('stock_code', stock_list[i]);
+                                                            objSelect.add(option);
+                                                        }
+                                                      </script>
                                                 <tr>
                                                     <td align="center" valign="middle">委托价格</td>
                                                     <td align="center" valign="middle"><input type="text" class="inp_l1" name="buying_rate" id="buying_rate" value=""></td>
@@ -210,16 +228,17 @@
                                             <div class="vspace"></div>
                                         </div>
                                         <div class="zj_nr_top3_right">
-                                            不会炒股?直接理财吧!
-
-正在发售
-年化收益18% 理财周期29天>>
-年化收益16% 理财周期10天>>
-年化收益20% 理财周期99天>>
-
-12月25日发售
-年化收益18% 理财周期26天>>
-
+                                            <div style="margin-left:20px; margin-top:20px; line-height: 180%; font-size:14px;">
+                                            不会炒股?直接理财吧!<br />
+                                            <br />
+                                            正在发售<br />
+                                            年化收益18% 理财周期29天>><br />
+                                            年化收益16% 理财周期10天>><br />
+                                            年化收益20% 理财周期99天>><br />
+                                            <br />
+                                            12月25日发售<br />
+                                            年化收益18% 理财周期26天>><br />
+                                            </div>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
