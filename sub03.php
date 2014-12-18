@@ -120,15 +120,6 @@
                                                     <td align="center" valign="middle">
                                                       <select name="stock_id" onchange="viewStock(this);">
                                                         <option value="0">请选择股票</option>
-                                                        <!-- 
-                                                        <?php
-                                                            $q = "select `id`, `stock_code`, `stock_name`, `stock_price` from `stock_info` order by `stock_name`";
-                                                            $rs = mysql_query($q); //获取数据集
-                                                            while($row = mysql_fetch_array($rs)){
-                                                                echo "<option value=\"".$row["id"]."\" cur_price=\"".$row["stock_price"]."\" stock_code=\"".$row["stock_code"]."\">".$row["stock_name"]."</option>";
-                                                            }
-                                                        ?>
-                                                        -->
                                                       </select>
 
                                                     </td>

@@ -84,23 +84,34 @@ elseif( !empty($_REQUEST["id"]) ) {
 	</tr>";
     while($row = mysql_fetch_array($rs)){
 	  $mysql_stockprice = $row["stock_price"];
+	  $mysql_stockcode = $row["stock_code"];
 	  echo "
 	<tr>
 	  <td>" . $row["id"] . "</td>
 	  <td>" . $row["stock_code"] . "</td>
 	  <td>" . $row["stock_name"] . "</td>
-	  <td>" . $row["stock_price"] . "</td>
+	  <td id='stock_price'>0</td>
 	</tr>"; //显示数据
-	}
+   	}
     echo "</table>";
 
     mysql_free_result($rs); //关闭数据集
+
 ?>
 	<br />
+<script type="text/javascript" src="http://hq.sinajs.cn/list=<?php echo $mysql_stockcode; ?>"></script>
+<script type="text/javascript">
+
+    var stock_info = eval('hq_str_<?php echo $mysql_stockcode; ?>.split(",")');
+	var stock_price = stock_info[3];
+	document.querySelector('#stock_price').innerHTML = stock_price;
+
+</script>
+
 	<form name="form1" method="post" action="stock_simulation.php">
 	  <input type="hidden" name="opt_type" value="update" />
 	  <input type="hidden" name="id" value="<?php echo $mysql_stockid;?>" />
-	  <input type="button" value=" 模 拟 " onclick="simulate_price(<?php echo $mysql_stockprice;?>)" />
+	  <input type="button" value=" 模 拟 " onclick="simulate_price(0)" />
 	  <br />
 	  开盘价 <input type="text" id="opening_price" name="opening_price" value="" /><span id="start_rand"></span>
 	  <br />
@@ -111,6 +122,10 @@ elseif( !empty($_REQUEST["id"]) ) {
 	
 	<script type="text/javascript">
 		function simulate_price(sp){
+
+			if(sp == 0){
+				sp = stock_price;
+			}
 			var opening_price = 0;
 			var closing_price = 0;
 			var flag = 0;

@@ -124,24 +124,32 @@ body, div, td {font-size: 14px;}
 	var objForm = document.getElementById('form1');
 
 	var objOption = objsel.options[objsel.selectedIndex];
-	objForm.stock_name.value = objOption.text;
+	objForm.stock_name.value = objOption.attributes['stock_code'].value + '_' + objOption.text;
 
 	document.querySelector('#buying_rate').value = objOption.attributes['cur_price'].value;
   }
 </script>
 	  <select name="stock_id" onchange="viewStock(this);">
 		<option value="0">请选择股票</option>
-<?php
-	$q = "select `id`, `stock_code`, `stock_name`, `stock_price` from `stock_info` order by `stock_name`";
-    $rs = mysql_query($q); //获取数据集
-    while($row = mysql_fetch_array($rs)){
-	    echo "<option value=\"".$row["id"]."\" cur_price=\"".$row["stock_price"]."\">".$row["stock_code"]."_".$row["stock_name"]."</option>";
-	}
-?>
 	  </select>
 	  <input type="hidden" name="stock_name" value="" />
 	</td>
 	</tr>
+<script type="text/javascript" src="http://hq.sinajs.cn/list=sh600229,sz000920,sh600000,sz000547,sh600571,sz000987,sh601226,sh601188,sh600396,sz002735"></script>
+<script type="text/javascript">
+    var stock_list_text = 'sh600229,sz000920,sh600000,sz000547,sh600571,sz000987,sh601226,sh601188,sh600396,sz002735';
+    var stock_list = stock_list_text.split(',');
+    var objSelect = document.getElementById('form1').stock_id;
+    for(var i in stock_list){
+        var stock_info = eval('hq_str_' + stock_list[i] + '.split(",")');
+        var option = document.createElement("option");
+        option.value = parseInt(i)+1;
+        option.text = stock_info[0];
+        option.setAttribute('cur_price', stock_info[3]);
+        option.setAttribute('stock_code', stock_list[i]);
+        objSelect.add(option);
+    }
+</script>
 	<tr>
 	<td>买入价</td>
 	<td><input type="text" name="buying_rate" id="buying_rate" placeholder="选择股票获得最新价" value="" /></td>
