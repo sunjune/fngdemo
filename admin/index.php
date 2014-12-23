@@ -1,4 +1,7 @@
 <?php
+require_once("../inc/passgate_login_info.php");
+?>
+<?php
 require_once("../inc/conf.php");
 require_once(SITEROOT . "/inc/db.php");
 ?>
